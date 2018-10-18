@@ -39,6 +39,9 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QTimer>
+#include <QWidget> 
+#include <QPixmap>
+
 
 // CTK includes
 #include <ctkAxesWidget.h>
@@ -437,6 +440,7 @@ double qMRMLVirtualRealityViewPrivate::stillUpdateRate()
 // --------------------------------------------------------------------------
 void qMRMLVirtualRealityViewPrivate::doOpenVirtualReality()
 {
+  
   if (this->Interactor && this->RenderWindow && this->RenderWindow->GetHMD() && this->Renderer)
   {
     this->Interactor->DoOneEvent(this->RenderWindow, this->Renderer);
@@ -638,7 +642,7 @@ bool qMRMLVirtualRealityView::isHardwareConnected()const
   if (!renWin->GetHMD())
   {
     return false;
-  }
+  }  
   // connected successfully
   return true;
 }
@@ -651,4 +655,17 @@ void qMRMLVirtualRealityView::onPhysicalToWorldMatrixModified()
   d->MRMLVirtualRealityViewNode->SetMagnification(d->InteractorStyle->GetMagnification());
 
   emit physicalToWorldMatrixModified();
+}
+
+//------------------------------------------------------------------------------
+void qMRMLVirtualRealityView::setVirtualWidget(QWidget* menuWidget)
+{
+  QPixmap menuTexture(menuWidget->size());
+  menuWidget->render(&menuTexture);
+
+  bool errorCheck = menuTexture.save("menuTextureImage.png", "PNG", 100); 
+  if (!errorCheck)
+  {
+    std::cerr << "Error while saving Menu Texture" << endl;
+  }
 }
