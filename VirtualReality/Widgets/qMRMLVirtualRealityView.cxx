@@ -17,7 +17,7 @@
   and was partially funded by NIH grant 3P41RR013218-12S1
 
 ==============================================================================*/
-
+#include "qSlicerHomeVirtualWidget.h"
 // Need to be included before qMRMLVRView_p
 #include <vtkOpenVRCamera.h>
 #include <vtkVirtualRealityViewInteractorStyle.h>
@@ -39,7 +39,6 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QTimer>
-#include <QWidget> 
 #include <QPixmap>
 
 
@@ -642,7 +641,7 @@ bool qMRMLVirtualRealityView::isHardwareConnected()const
   if (!renWin->GetHMD())
   {
     return false;
-  }  
+  }
   // connected successfully
   return true;
 }
@@ -666,6 +665,6 @@ void qMRMLVirtualRealityView::setVirtualWidget(QWidget* menuWidget)
   bool errorCheck = menuTexture.save("menuTextureImage.png", "PNG", 100); 
   if (!errorCheck)
   {
-    std::cerr << "Error while saving Menu Texture" << endl;
+    qCritical() << Q_FUNC_INFO << ": Error while saving Menu Texture" << endl;
   }
 }
