@@ -17,7 +17,6 @@
   and was partially funded by NIH grant 3P41RR013218-12S1
 
 ==============================================================================*/
-#include "qSlicerHomeVirtualWidget.h"
 // Need to be included before qMRMLVRView_p
 #include <vtkOpenVRCamera.h>
 #include <vtkVirtualRealityViewInteractorStyle.h>
@@ -40,7 +39,8 @@
 #include <QToolButton>
 #include <QTimer>
 #include <QPixmap>
-
+#include <QSlider>
+#include <QFormLayout>
 
 // CTK includes
 #include <ctkAxesWidget.h>

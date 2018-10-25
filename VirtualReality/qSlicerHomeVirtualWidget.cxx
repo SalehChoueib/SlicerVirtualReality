@@ -35,7 +35,6 @@
 #include <QLabel>
 #include <QSpacerItem>
 
-#include "qSlicerHomeVirtualWidget.h"
 //-----------------------------------------------------------------------------
 //   qSlicerHomeVirtualWidget Methods
 
